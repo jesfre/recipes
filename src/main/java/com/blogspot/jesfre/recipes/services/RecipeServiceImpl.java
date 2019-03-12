@@ -9,9 +9,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by jt on 6/13/17.
- */
+
 @Slf4j
 @Service
 public class RecipeServiceImpl implements RecipeService {

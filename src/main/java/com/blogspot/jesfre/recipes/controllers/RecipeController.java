@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
-/**
- * Created by jt on 6/19/17.
- */
 @Slf4j
 @Controller
 public class RecipeController {

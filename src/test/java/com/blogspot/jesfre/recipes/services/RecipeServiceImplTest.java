@@ -1,11 +1,19 @@
 package com.blogspot.jesfre.recipes.services;
 
+import com.blogspot.jesfre.recipes.commands.RecipeCommand;
+import com.blogspot.jesfre.recipes.converters.RecipeCommandToRecipe;
+import com.blogspot.jesfre.recipes.converters.RecipeToRecipeCommand;
 import com.blogspot.jesfre.recipes.model.Recipe;
 import com.blogspot.jesfre.recipes.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -14,18 +22,27 @@ import java.util.Set;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class RecipeServiceImplTest {
+    public static final String NEW_DESCRIPTION = "New Description";
 
     RecipeServiceImpl recipeService;
 
     @Mock
     RecipeRepository recipeRepository;
 
+    @Autowired
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
+    @Autowired
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -85,4 +102,6 @@ public class RecipeServiceImplTest {
         //then
         verify(recipeRepository, times(1)).deleteById(anyLong());
     }
+
+
 }

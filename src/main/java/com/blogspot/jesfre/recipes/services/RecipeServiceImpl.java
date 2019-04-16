@@ -3,6 +3,7 @@ package com.blogspot.jesfre.recipes.services;
 import com.blogspot.jesfre.recipes.commands.RecipeCommand;
 import com.blogspot.jesfre.recipes.converters.RecipeCommandToRecipe;
 import com.blogspot.jesfre.recipes.converters.RecipeToRecipeCommand;
+import com.blogspot.jesfre.recipes.exceptions.NotFoundException;
 import com.blogspot.jesfre.recipes.model.Recipe;
 import com.blogspot.jesfre.recipes.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe findById(Long l) {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
-        return recipeOptional.orElseThrow(()->new RuntimeException("Recipe Not Found. For ID value: " + l.toString()));
+        return recipeOptional.orElseThrow(()->new NotFoundException("Recipe Not Found. For ID value: " + l.toString()));
 
     }
 

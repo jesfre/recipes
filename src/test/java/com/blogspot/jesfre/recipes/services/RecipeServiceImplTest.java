@@ -3,6 +3,7 @@ package com.blogspot.jesfre.recipes.services;
 import com.blogspot.jesfre.recipes.commands.RecipeCommand;
 import com.blogspot.jesfre.recipes.converters.RecipeCommandToRecipe;
 import com.blogspot.jesfre.recipes.converters.RecipeToRecipeCommand;
+import com.blogspot.jesfre.recipes.exceptions.NotFoundException;
 import com.blogspot.jesfre.recipes.model.Recipe;
 import com.blogspot.jesfre.recipes.repositories.RecipeRepository;
 import org.junit.Before;
@@ -60,7 +61,7 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, never()).findAll();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NotFoundException.class)
     public void getRecipeByIdTestNotFound() throws Exception {
 
         Optional<Recipe> recipeOptional = Optional.empty();

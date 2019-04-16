@@ -1,6 +1,7 @@
 package com.blogspot.jesfre.recipes.controllers;
 
 import com.blogspot.jesfre.recipes.commands.RecipeCommand;
+import com.blogspot.jesfre.recipes.exceptions.NotFoundException;
 import com.blogspot.jesfre.recipes.model.Recipe;
 import com.blogspot.jesfre.recipes.services.RecipeService;
 import org.junit.Before;
@@ -52,7 +53,7 @@ public class RecipeControllerTest {
     @Test
     public void testGetRecipeNotFound() throws Exception {
 
-        when(recipeService.findById(anyLong())).thenThrow(RuntimeException.class);
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
 
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isNotFound())

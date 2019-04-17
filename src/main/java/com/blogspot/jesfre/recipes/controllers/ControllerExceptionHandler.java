@@ -21,7 +21,8 @@ public class ControllerExceptionHandler {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("400error");
+        modelAndView.setViewName("error");
+        modelAndView.addObject("title", HttpStatus.BAD_REQUEST.value() + " " + HttpStatus.BAD_REQUEST.getReasonPhrase());
         modelAndView.addObject("exception", exception);
 
         return modelAndView;
